@@ -1,7 +1,6 @@
 pipeline {
     agent any
 
-
   stages {
      stage("Initial cleanup") {
           steps {
@@ -26,5 +25,11 @@ pipeline {
              sh 'php artisan key:generate'
       }
     }
+
+    stage('Execute Unit Tests') {
+      steps {
+             sh './vendor/bin/phpunit'
+      }
+    } 
   }
 }
