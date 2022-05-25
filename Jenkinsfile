@@ -71,16 +71,13 @@ pipeline {
                   {
                    "pattern": "php-todo.zip",
                    "target": "PBL/php-todo",
-                   "props": "type=zip;status=ready"
-
+                   "props": "type=zip;status=ready"                  
                    }
                 ]
              }""" 
-
              server.upload spec: uploadSpec
            }
         }
-
     }
   }
 }
