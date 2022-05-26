@@ -38,7 +38,6 @@ pipeline {
       }
     } 
 
-
     stage('Plot Code Coverage Report') {
       steps {
 
