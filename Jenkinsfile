@@ -94,10 +94,10 @@ pipeline {
         }
     }
 
-    // stage ('Deploy to Dev Environment') {
-    //   steps {
-    //     build job: 'ansible-config-proj-14/main', parameters: [[$class: 'StringParameterValue', name: 'env', value: 'dev.yml']], propagate: false, wait: true
-    //   }
-    // }
+    stage ('Deploy to Dev Environment') {
+      steps {
+        build job: 'ansible-config-mgt-redo/main', parameters: [[$class: 'StringParameterValue', name: 'env', value: 'dev.yml']], propagate: false, wait: true
+      }
+    }
   }
 }
