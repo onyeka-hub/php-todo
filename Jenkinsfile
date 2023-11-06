@@ -55,16 +55,16 @@ pipeline {
       }
     }
 
-    // stage('SonarQube Quality Gate') {
-    // environment {
-    //     scannerHome = tool 'SonarQubeScanner'
-    // }
-    // steps {
-    //     withSonarQubeEnv('sonarqube') {
-    //        sh "${scannerHome}/bin/sonar-scanner"
-    //     }
-    //   }
-    // }
+    stage('SonarQube Quality Gate') {
+    environment {
+        scannerHome = tool 'SonarQubeScanner'
+    }
+    steps {
+        withSonarQubeEnv('sonarqube') {
+           sh "${scannerHome}/bin/sonar-scanner"
+        }
+      }
+    }
 
     // stage('SonarQube Quality Gate') {
     //   when { branch pattern: "^develop*|^hotfix*|^release*|^main*", comparator: "REGEXP"}
