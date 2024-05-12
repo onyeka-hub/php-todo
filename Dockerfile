@@ -1,7 +1,8 @@
-FROM php:7.4.30-cli
+FROM php:7.4-cli
 
 USER root
-WORKDIR  /var/www/html
+
+WORKDIR /var/www/html
 
 RUN apt-get update && apt-get install -y \
     libpng-dev \
@@ -19,8 +20,20 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install zip \
     && docker-php-source delete
 
-COPY . .
-
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-ENTRYPOINT [  "bash", "start-apache.sh" ]
+RUN COMPOSER_ALLOW_SUPERUSER=1
+
+COPY . .
+
+RUN composer install
+
+RUN tr -d '\r' < start-apache.sh > start-apache-unix.sh
+
+RUN mv start-apache-unix.sh start-apache.sh
+
+RUN chmod 777 start-apache.sh
+
+EXPOSE 8000
+
+ENTRYPOINT [ "bash", "start-apache.sh" ]
